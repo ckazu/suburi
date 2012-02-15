@@ -1,0 +1,11 @@
+.bundle
+.rvmrc
+.rspec
+Guardfile
+*.watchr
+*.swp
+.DS_Store
+._.DS_Store
+.sass-cache/
+**/coverage/
+**/reports/
