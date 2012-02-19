@@ -1,2 +1,129 @@
+$base-color: #cf3;
+$key-color: #3cf;
+$accent-color: #f3c;
+
+$tracing-color: #666;
+$current-color: $key-color;
+$correct-color: $base-color;
+$wrong-color: $accent-color;
+
+$word-size: 2em;
+
 body {
+  background: transparentize($base-color, .8);
+  margin: 12px 0 0;
+
+  header {
+    text-align: center;
+
+    h1 {
+      line-height: 1em;
+      margin: 0;
+      font: {
+        size: 4em;
+        family: 'Covered By Your Grace', cursive;
+      }
+
+      ~ p {
+        width: 15em;
+        color: white;
+        font: {
+          weight: bold;
+          size: .8em;
+        }
+        background: $base-color * 0.5;
+        margin: 0 auto;
+      }
+    }
+
+    h2 {
+      color: $accent-color * .5;
+      font: {
+        size: 1.25em;
+      }
+      margin: .25em auto 2em;
+    }
+
+    nav {
+      ul {
+        li {
+          display: inline-block;
+          list-style-type: none;
+          padding: 0 .5em;
+          border-bottom: 1px solid $tracing-color * 1.5;
+          &:hover { border-bottom:  3px solid $current-color * 0.8 }
+        }
+      }
+    }
+  }
+
+  #result {
+    color: $correct-color * .25;
+    font: {
+      size: 1.25em;
+      family: 'Inconsolata'
+    }
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    width: 80px;
+    height: 20px;
+    padding: 4px;
+    background: transparentize(#fff, 0.2);
+    box-shadow: gray 1px 1px 1px;
+    text-align: right;
+    z-index: 9999;
+  }
+
+  #field {
+    color: $tracing-color;
+    font: {
+      size: $word-size;
+      family: 'Inconsolata', monospace;
+    }
+
+    ul {
+      margin: 1em;
+      padding: 1em;
+      line-height: 1.5em;
+      background: #000;
+      position: relative;
+
+      li {
+        display: inline-block;
+        padding-right: .5em;
+        border-bottom: 1px solid $tracing-color;
+
+        &.current { border-bottom: 3px solid $current-color; }
+
+        span {
+          display: inline-block;
+          letter-spacing: -.5em;
+          margin-right: .5em;
+          padding: 0;
+          &.current { color: $current-color; }
+          &.correct { color: $correct-color; }
+          &.wrong   { color: $wrong-color; }
+          &.wrong:first-letter { color: $tracing-color; }
+        }
+      }
+    }
+  }
+  #tweet-result {
+    display: none;
+    text-align: center;
+    padding: 1em;
+  }
+
+  #footer {
+    height: 5em;
+    display: none;
+    background: $base-color * .1;
+    color: $tracing-color;
+    text-align: center;
+    padding-top: 4em;
+    font: {
+      size: .8em;
+    }
+  }
 }
