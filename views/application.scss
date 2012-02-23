@@ -24,7 +24,7 @@ body {
         family: 'Covered By Your Grace', cursive;
       }
 
-      ~ p {
+      + p {
         width: 15em;
         color: white;
         font: {
@@ -41,17 +41,24 @@ body {
       font: {
         size: 1.25em;
       }
-      margin: .25em auto 2em;
+      margin: .25em auto 1em;
+      ~ p {
+        line-height: .5em;
+      }
     }
 
     nav {
+      margin-top: 3em;
       ul {
         li {
           display: inline-block;
           list-style-type: none;
           padding: 0 .5em;
           border-bottom: 1px solid $tracing-color * 1.5;
-          &:hover { border-bottom:  3px solid $current-color * 0.8 }
+          &:hover {
+            border-bottom:  3px solid $current-color * 0.8;
+            cursor: pointer;
+          }
         }
       }
     }
