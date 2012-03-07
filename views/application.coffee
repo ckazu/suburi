@@ -23,6 +23,7 @@ clearData = =>
   $('#field').hide()
   $('#tweet-result').hide()
   @counter = 0
+  @correct = 0
   $('#field').empty()
   $('#result').empty()
   $('#tweet-result').empty()
@@ -37,6 +38,8 @@ type = (e) =>
       e.preventDefault()        # prevent scroll of browser
     else
       input(String.fromCharCode(e.which))
+
+  $('#result').text "#{@counter}, #{@correct}"
 
 tracingWords = (_words) =>
   words = []
@@ -65,7 +68,15 @@ generateWord = (word) =>
     ret += "<span>#{word.charAt(n)}</span>"
   ret
 
+checkAnswer = =>
+  if $('#field ul.current li.current span').length == $('#field ul.current li.current span.correct').length
+    $('#field ul.current li.current').addClass('correct')
+    @correct++
+  else
+    $('#field ul.current li.current').addClass('wrong')
+
 nextWord = =>
+  checkAnswer()
   if $('#field ul.current li.current').next().length isnt 0
     $('#field ul.current li.current').removeClass('current')
                                      .find('span').removeClass('current')
@@ -107,8 +118,6 @@ input = (code) =>
   else
     el.append(code)
       .addClass(judge)
-
-   $('#result').text @counter
 
 sample = (array) =>
   array[Math.floor(Math.random() * array.length)]
