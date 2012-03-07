@@ -102,6 +102,10 @@ body {
         border-bottom: 1px solid $tracing-color;
 
         &.current { border-bottom: 3px solid $current-color; }
+        &.correct,
+        &.wrong {
+          -webkit-animation: enter .1s ease-in-out 1;
+        }
 
         span {
           display: inline-block;
@@ -109,7 +113,10 @@ body {
           margin-right: .5em;
           padding: 0;
           &.current { color: $current-color; }
-          &.correct { color: $correct-color; }
+          &.correct {
+            color: $correct-color;
+            -webkit-animation: correct 0.5s ease-out 1;
+          }
           &.wrong   {
             color: $wrong-color;
             -webkit-animation: mistake .1s ease-in-out 1;
@@ -139,13 +146,23 @@ body {
 }
 
 @-webkit-keyframes mistake {
-  0%   { color: #fff; }
-  25%  { color: transparent; }
-  50%  { color: #fff; -webkit-transform: rotate(0deg);  }
-  60%  { -webkit-transform: rotate(50deg); }
-  70%  { -webkit-transform: rotate(-50deg);}
-  75%  { color: transparent; }
-  80%  { -webkit-transform: rotate(4deg); }
-  90%  { -webkit-transform: rotate(-3deg); }
+    0% { color: #fff; }
+   25% { color: inherit; }
+   50% { color: #fff; -webkit-transform: rotate(0deg);  }
+   60% { -webkit-transform: rotate(60deg); }
+   70% { -webkit-transform: rotate(-450deg);}
+   75% { color: inherit; }
+   80% { -webkit-transform: rotate(15deg); }
+   90% { -webkit-transform: rotate(-5deg); }
   100% { -webkit-transform: rotate(0deg); }
+}
+
+@-webkit-keyframes correct {
+   0%  { color: transparentize($correct-color, .7); }
+  50%  { color: $correct-color; }
+}
+
+@-webkit-keyframes enter {
+   0%  { -webkit-transform: scale(0.97);}
+  70%  { -webkit-transform: scale(1.03);}
 }
