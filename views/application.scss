@@ -1,6 +1,7 @@
 $base-color: #cf3;
 $key-color: #3cf;
 $accent-color: #f3c;
+$shadow-color: #333;
 
 $tracing-color: #666;
 $current-color: $key-color;
@@ -8,6 +9,38 @@ $correct-color: $base-color;
 $wrong-color: $accent-color;
 
 $word-size: 2em;
+
+@mixin paper-shadow {
+  &:before,
+  &:after {
+    z-index: -1;
+    position: absolute;
+    content: "";
+    bottom: 15px;
+    left: 10px;
+    width: 50%;
+    top: 80%;
+    max-width:300px;
+    background: $shadow-color;
+    -webkit-box-shadow: 0 15px 10px $shadow-color;
+    -moz-box-shadow: 0 15px 10px $shadow-color;
+    box-shadow: 0 15px 10px $shadow-color;
+    -webkit-transform: rotate(-3deg);
+    -moz-transform: rotate(-3deg);
+    -o-transform: rotate(-3deg);
+    -ms-transform: rotate(-3deg);
+    transform: rotate(-3deg);
+  }
+  &:after {
+    -webkit-transform: rotate(3deg);
+    -moz-transform: rotate(3deg);
+    -o-transform: rotate(3deg);
+    -ms-transform: rotate(3deg);
+    transform: rotate(3deg);
+    right: 10px;
+    left: auto;
+  }
+}
 
 body {
   background: transparentize($base-color, .8);
@@ -95,6 +128,7 @@ body {
       line-height: 1.5em;
       background: #000;
       position: relative;
+      @include paper-shadow;
 
       li {
         display: inline-block;
