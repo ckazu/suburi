@@ -96,7 +96,7 @@ nextWord = =>
                                      .next().addClass('current')
                                      .find('li:first').addClass('current')
                                      .find('span:first').addClass('current')
-    $('body').animate {scrollTop: $('#field ul.current').position().top}, 99, 'swing'
+    $('body').animate {scrollTop: $('#field ul.current').position().top - 120}, 99, 'swing'
   else
     $('#field ul.current li.current').removeClass('current')
                                      .find('span').removeClass('current')

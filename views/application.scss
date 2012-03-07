@@ -129,6 +129,10 @@ body {
       background: #000;
       position: relative;
       @include paper-shadow;
+      -webkit-transition: all .5s ease-out;
+      &:not(.current) {
+        background: #333;
+      }
 
       li {
         display: inline-block;
