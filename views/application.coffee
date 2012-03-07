@@ -4,7 +4,7 @@ $ ->
   initializeAll()
 
 initializeAll = =>
-  @level = 15
+  @level = 5
   $('header nav').on 'click', 'li', (e) => initialize(e)
 
 initialize = (e) =>
@@ -32,12 +32,19 @@ clearData = =>
 type = (e) =>
   return if $('#field ul.current').length is 0
 
-  switch e.which
-    when 13, 32
-      nextWord()
-      e.preventDefault()        # prevent scroll of browser
-    else
-      input(String.fromCharCode(e.which))
+  if e.ctrlKey
+    switch e.which
+      when 10, 13, 14           # c-j, c-m, c-n
+        nextWord()
+      else
+        return
+  else
+    switch e.which
+      when 13, 32               # ctrl+j, enter, space
+        nextWord()
+        e.preventDefault()      # prevent scroll of browser
+      else
+        input(String.fromCharCode(e.which))
 
   $('#result').text "#{@counter}, #{@correct}"
 
