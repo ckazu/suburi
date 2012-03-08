@@ -34,13 +34,13 @@ type = (e) =>
 
   if e.ctrlKey
     switch e.which
-      when 10, 13, 14           # c-j, c-m, c-n
+      when 74, 77, 78           # c-j, c-m, c-n
         nextWord()
       else
         return
   else
     switch e.which
-      when 13, 32               # ctrl+j, enter, space
+      when 13, 32               # enter, space
         nextWord()
         e.preventDefault()      # prevent scroll of browser
       else
