@@ -17,7 +17,7 @@ initialize = (e) =>
   $('#field ul > li:first').addClass('current')
   $('#field ul > li > span:first').addClass('current')
   $('#field').fadeIn()
-  $('body').on 'keypress', (e) -> type(e)
+  $('body').on { keypress: typeKey, keydown: typeCtrlKey }
 
 clearData = =>
   $('#field').hide()
@@ -27,25 +27,34 @@ clearData = =>
   $('#field').empty()
   $('#result').empty()
   $('#tweet-result').empty()
-  $('body').off 'keypress'
+  $('body').off('keypress')
+           .off('keydown')
 
-type = (e) =>
+typeCtrlKey = (e) =>
+  return unless e.ctrlKey
+
+  e.preventDefault()          # prevent scroll of browser
+  switch e.which
+    when 74, 77, 78           # c-j, c-m, c-n
+      nextWord()
+    else
+      return
+
+  displayResult()
+
+typeKey = (e) =>
   return if $('#field ul.current').length is 0
 
-  if e.ctrlKey
-    switch e.which
-      when 74, 77, 78           # c-j, c-m, c-n
-        nextWord()
-      else
-        return
-  else
-    switch e.which
-      when 13, 32               # enter, space
-        nextWord()
-        e.preventDefault()      # prevent scroll of browser
-      else
-        input(String.fromCharCode(e.which))
+  switch e.which
+    when 13, 32               # ctrl+j, enter, space
+      nextWord()
+      e.preventDefault()      # prevent scroll of browser
+    else
+      input(String.fromCharCode(e.which))
 
+  displayResult()
+
+displayResult = =>
   $('#result').text "#{@counter}, #{@correct}"
 
 tracingWords = (_words) =>
